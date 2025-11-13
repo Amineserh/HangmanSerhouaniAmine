@@ -1,0 +1,175 @@
+﻿<Window x:Class="PenduWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Le Pendu Stylé de BTS" Height="650" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="LettreButtonStyle">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#9400D3" Offset="0.0"/>
+                        <GradientStop Color="#C71585" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="#4B0082"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#DA70D6"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#8A2BE2"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button" x:Key="DifficultyButtonStyle">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#4B0082"/>
+            <Setter Property="BorderBrush" Value="#C71585"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#9400D3"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <TabControl x:Name="MainTabControl" SelectedIndex="0" Background="#191970">
+        <TabItem Header="Choix de la Difficulté" IsSelected="True" Name="DifficultyTab">
+            <Grid Background="#191970">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="Sélectionnez un Niveau de Difficulté"
+                               FontSize="30" FontWeight="Bold" Foreground="White"
+                               Margin="0,0,0,40" HorizontalAlignment="Center"/>
+
+                    <Button Content="FACILE (50s / 7 Vies)" Style="{StaticResource DifficultyButtonStyle}"
+                            Tag="1" Click="DifficultyButton_Click"/>
+                    <Button Content="INTERMÉDIAIRE (40s / 5 Vies)" Style="{StaticResource DifficultyButtonStyle}"
+                            Tag="2" Click="DifficultyButton_Click"/>
+                    <Button Content="HARDCORE (15s / 3 Vies / Malus de temps)" Style="{StaticResource DifficultyButtonStyle}"
+                            Tag="3" Click="DifficultyButton_Click"/>
+
+                    <TextBlock x:Name="InstructionTextBlock" Text="Les mots sont aléatoires et correspondent au thème Informatique."
+                               FontSize="14" Foreground="#ADD8E6" Margin="0,30,0,0" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Le Pendu" Name="GameTab" IsEnabled="False">
+            <Grid x:Name="GameGrid">
+                <Grid.Background>
+                    <ImageBrush x:Name="BackgroundImage" Stretch="UniformToFill"/>
+                </Grid.Background>
+
+                <StackPanel Margin="20" Background="#99000000">
+                    <TextBlock x:Name="TimerTextBlock"
+                               Text="Temps: 00:00"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               Foreground="#FFD700"
+                               HorizontalAlignment="Right"
+                               Margin="0,0,10,10"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                        <TextBlock x:Name="StatutCoeursTextBlock"
+                                   Text="Vies : ❤️❤️❤️❤️❤️❤️❤️"
+                                   FontSize="20"
+                                   Foreground="#ADD8E6"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,40,0"/>
+                        <TextBlock x:Name="IndiceTextBlock"
+                                   Text="Indice: Non disponible"
+                                   FontSize="20"
+                                   Foreground="#ADD8E6"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+
+
+                    <Button x:Name="RejouerButton"
+                            Content="NOUVELLE PARTIE (Changer Difficulté)"
+                            Click="RejouerButton_Click"
+                            HorizontalAlignment="Center"
+                            Visibility="Collapsed"
+                            FontSize="20"
+                            Padding="10"
+                            Margin="0,0,0,20"
+                            Background="#3CB371" Foreground="White"/>
+
+                    <TextBlock x:Name="MotAfficheTextBlock"
+                               Text=" _ _ _ _ _"
+                               FontSize="60"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,10"
+                               TextAlignment="Center"/>
+
+                    <TextBlock x:Name="ResultatTextBlock"
+                               Text="Prêt à jouer ?"
+                               FontSize="20"
+                               Foreground="#ADD8E6"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,10"/>
+
+                    <Border BorderBrush="#ADD8E6" BorderThickness="1" Padding="10"
+                            CornerRadius="5" HorizontalAlignment="Center" Margin="0,0,0,20"
+                            Background="#CC000000">
+                        <TextBlock x:Name="PenduDessinTextBlock"
+                                   Text=""
+                                   FontFamily="Consolas"
+                                   FontSize="14"
+                                   Foreground="White"
+                                   Height="150"
+                                   Width="200"
+                                   HorizontalAlignment="Center"/>
+                    </Border>
+
+                    <WrapPanel x:Name="AlphabetPanel"
+                               HorizontalAlignment="Center"
+                               Margin="0,10,0,0">
+                    </WrapPanel>
+
+                </StackPanel>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>
