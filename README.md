@@ -59,7 +59,7 @@ Chaque erreur compte : ici, c’est la survie pure.
 
 ---
 
-## ⭐ Avis de Joueurs (fictifs)
+## ⭐ Avis de Joueurs 
 
 ### 🧑‍🦱 1. Lucas Benali — Ami d’enfance
 > *« Le jeu est super cool, j’ai adoré le mode facile. L’ambiance forêt est vraiment chill et ça détend pendant une partie ! »*
