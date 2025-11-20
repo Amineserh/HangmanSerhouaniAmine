@@ -81,5 +81,5 @@ Chaque erreur compte : ici, c’est la survie pure.
 
 ---
 
-### 👱‍♂️ 5. Julien Marc — Passant random dans la rue
+### 👱‍♂️ 5. Julien Marc — Passant random dans le couloir
 > *« J’ai testé par curiosité, c’est propre. Les trois ambiances sont stylées, surtout l’enfer. Le concept des bonus/malus est génial ! »*
